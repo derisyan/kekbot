@@ -48,9 +48,9 @@ _spurdo_dict = {
 	"us":			"uz",
 	"ws":			"wz",
 	"ys":			"yz",
-	"ic":			"ig",
+#	"ic":			"ig",
 	"ng":			"nk",
-
+	"vic":			"vig",
 	"wha":			"wa",
 	"alk":			"olk",
 	"ing":			"ign",
@@ -69,7 +69,7 @@ def parse_case(text):
 	return tmp
 
 def offset_caselist(cl, left, offset):
-	if(left > cl[-1]):
+	if (len(cl) == 0) or (left > cl[-1]):
 		return cl
 	for i in xrange(0, len(cl)):
 		if cl[i] >= left:
