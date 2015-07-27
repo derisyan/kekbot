@@ -1,6 +1,7 @@
 from core import *
 from string import digits
 from collections import OrderedDict as odict
+import random
 
 rainbow_colors = (4, 7, 8, 3, 2, 6, 12)
 _spurdo_dict = {
@@ -148,7 +149,17 @@ def spurdo(bot, msg, args, pure):
 		for key in spurdo_dict:
 			tmp = tmp.replace(key, spurdo_dict[key])
 		if tmp.count(":DD") == 0:
-			tmp += " :DDD"
+			tmp += " :DD"
+		for laugh in (":DD", "xDD"):
+			laugh_slices = tmp.split(laugh)
+			tmp = ""
+			if len(laugh_slices) != 1:
+				for i in xrange(0, len(laugh_slices)):
+					tmp += laugh_slices[i]
+					if i < (len(laugh_slices) - 1):
+						tmp += laugh[0] + (random.randint(1,4) * "D")
+			else:
+				tmp = laugh_slices[0]
 		out = tmp
 	if (not pure) and out:
 		bot.conn.privmsg(msg.args[0], out)
