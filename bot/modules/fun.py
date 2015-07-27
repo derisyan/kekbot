@@ -1,5 +1,4 @@
 from core import *
-from string import digits
 from collections import OrderedDict as odict
 import random
 
@@ -7,7 +6,6 @@ rainbow_colors = (4, 7, 8, 3, 2, 6, 12)
 _spurdo_dict = {
 	".":			" :DD",
 	",":			" xDD",
-	"th":			"d",
 	"af":			"ab",
 	"ap":			"ab",
 	"ca":			"ga",
@@ -63,6 +61,33 @@ _spurdo_dict = {
 }
 spurdo_dict = odict(sorted(list(_spurdo_dict.items()), key=lambda t: -len(t[0])))
 
+def parse_case(text):
+	tmp = []
+	for i in xrange(0, len(text)):
+		if text[i].isupper():
+			tmp.append(i)
+	return tmp
+
+def offset_caselist(cl, left, offset):
+	if(left > cl[-1]):
+		return cl
+	for i in xrange(0, len(cl)):
+		if cl[i] >= left:
+			break
+	for j in xrange(i, len(cl)):
+		cl[j] += offset
+	return cl
+
+def restore_case(text, cl):
+	text = list(text)
+	for e in cl:
+		try:
+			text[e] = text[e].upper()
+		except IndexError:
+			break
+	text = "".join(text)
+	return text
+
 def parse_color_text(text):
 	if "\x03" not in text:
 		return [("", "", text)]
@@ -78,7 +103,7 @@ def parse_color_text(text):
 		for i in range(0, 6):
 			if counter <= 0:
 				break
-			if p[i] in digits:
+			if p[i].isdigit():
 				if not past_comma:
 					fg_str += p[i]
 				else :
@@ -91,7 +116,6 @@ def parse_color_text(text):
 			counter -= 1
 		p = p[i:]
 		fg, bg = -1, -1
-		print((fg_str,"|",bg_str))
 		if fg_str:
 			fg = int(fg_str)
 			fg_str,"->",fg
@@ -145,9 +169,15 @@ def spurdo(bot, msg, args, pure):
 	tmp = strip_colors(" ".join(args))
 	out = "usage: spurdo <text>"
 	if tmp:
+		tmp_cl = parse_case(tmp)
 		tmp = tmp.lower()
 		for key in spurdo_dict:
+			old_len = len(tmp)
+			leftmost = tmp.find(key)
 			tmp = tmp.replace(key, spurdo_dict[key])
+			offset = len(tmp) - old_len
+			tmp_cl = offset_caselist(tmp_cl, leftmost, offset)
+		tmp = restore_case(tmp, tmp_cl)
 		if tmp.count(":DD") == 0:
 			tmp += " :DD"
 		for laugh in (":DD", "xDD"):
