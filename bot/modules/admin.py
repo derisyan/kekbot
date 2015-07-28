@@ -65,7 +65,7 @@ def unblock(bot, msg, args, pure):
 def nick(bot, msg, args, pure):
 	out = "usage: nick <nick>"
 	if len(args) == 1:
-		bot.bot.conn.nick(args[0])
+		bot.conn.nick(args[0])
 		out = ""
 	if (not pure) and out:
 		bot.conn.privmsg(msg.args[0], out)
