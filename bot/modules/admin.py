@@ -1,4 +1,5 @@
 from core import *
+from util import *
 
 @command("join", 2)
 def join(bot, msg, args, pure):
@@ -146,7 +147,7 @@ def set_cmd_prefix(bot, msg, args, pure):
 @command("cooldown", 3)
 def set_cooldown(bot, msg, args, pure):
 	out = "usage: cooldown <float(secs)>"
-	if (len(args) == 1) and args[0].isdigit():
+	if (len(args) == 1) and is_float(args[0]):
 		tm = float(args[0])
 		if (tm > 0) and (tm < 61):
 			bot.cooldown_time = tm

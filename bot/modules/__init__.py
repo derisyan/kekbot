@@ -2,6 +2,7 @@ import os
 
 module_blacklist = (
 "__init__",
+"util",
 )
 temp = []
 
