@@ -40,5 +40,5 @@ def showpr(bot, msg, args, pure):
 def show_source(bot, msg, args, pure):
 	out = "like favorite subscribe -> https://github.com/AtaK/kekbot"
 	if (not pure) and out:
-		bott.conn.privmsg(msg.args[0], out)
+		bot.conn.privmsg(msg.args[0], out)
 	return out
