@@ -101,6 +101,37 @@ def list_commands(bot, msg, args, pure):
 			bot.conn.privmsg(msg.args[0], out)
 		return out
 
+@command("triggers", 2)
+def list_triggers(bot, msg, args, pure):
+	out = "usage: triggers <add/del/list> [cmds]"
+	if len(args) >= 1:
+		if args[0] == "list":
+			tmp = "trgs: "
+			for trg in trg_dict:
+				if trg in bot.active_trg:
+					tmp += "\x0303"
+				else:
+					tmp += "\x0304"
+				tmp += trg + " "
+			out = tmp
+		elif (args[0] == "add") and len(args) > 1:
+			tmp = []
+			for trg in args[1:]:
+				if (trg in trg_dict) and (trg not in bot.active_trg):
+					bot.active_trg.append(trg)
+					tmp.append(trg)
+			out = "trgs added: %s" % ", ".join(tmp)
+		elif (args[0] == "del") and len(args) > 1:
+			tmp = []
+			for trg in args[1:]:
+				if (trg in trg_dict) and (trg in bot.active_trg):
+					bot.active_trg.remove(trg)
+					tmp.append(trg)
+			out = "trgs del'd: %s" % ", ".join(tmp)
+		if (not pure) and out:
+			bot.conn.privmsg(msg.args[0], out)
+		return out
+
 @command("cmdprefix", 3)
 def set_cmd_prefix(bot, msg, args, pure):
 	tmp = " ".join(args)
