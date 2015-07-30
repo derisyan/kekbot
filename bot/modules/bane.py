@@ -36,3 +36,6 @@ def bane_trg(bot, msg):
 			if re.search(key, msg.trailing) is not None:
 				bot.conn.privmsg(msg.args[0], baneposting_dict[key])
 				break
+
+
+re.search

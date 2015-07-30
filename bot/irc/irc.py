@@ -106,6 +106,7 @@ class irc_connection:
 		self.sock.send(raw_msg)
 
 	def nick(self, new):
+		self._nick = new
 		self.send_raw("NICK %s" % new)
 
 	def user(self, usr = "user", realname = "realname"):
