@@ -157,3 +157,17 @@ def set_cooldown(bot, msg, args, pure):
 	if (not pure) and out:
 		bot.conn.privmsg(msg.args[0], out)
 	return out
+
+@command("looptime", 3)
+def set_loop_tm(bot, msg, args, pure):
+	out = "usage: looptime <float(secs)>"
+	if (len(args) == 1) and is_float(args[0]):
+		tm = float(args[0])
+		if (tm > 0) and (tm < 10):
+			bot.desired_loop_tm = tm
+			out = "loop_time set to %f seconds" % tm
+		else:
+			out = "loop_time value too extreme: %f" % tm
+	if (not pure) and out:
+		bot.conn.privmsg(msg.args[0], out)
+	return out
