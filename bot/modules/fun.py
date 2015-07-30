@@ -2,6 +2,7 @@ from core import *
 from util import *
 from collections import OrderedDict as odict
 import random
+import re
 
 rainbow_colors = (4, 7, 8, 3, 2, 6, 12)
 _spurdo_dict = {
@@ -118,3 +119,9 @@ def rms_interject(bot, msg, args, pure):
 	if (not pure) and out:
 		bot.conn.privmsg(msg.args[0], out)
 	return out
+
+@trigger("normieblock")
+def normie_blocker(bot, msg):
+	if (msg.command == "PRIVMSG"):
+		if re.search("(my (gf|girlfriend))|(tfw gf)", msg.trailing) is not None:
+			bot.conn.privmsg(msg.args[0], "\x0304%s has been blocked for being a normie" % msg.source.nick)
