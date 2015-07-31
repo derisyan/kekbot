@@ -125,3 +125,4 @@ def normie_blocker(bot, msg):
 	if (msg.command == "PRIVMSG"):
 		if re.search("(my (gf|girlfriend))|(tfw gf)", msg.trailing) is not None:
 			bot.conn.privmsg(msg.args[0], "\x0304%s has been blocked for being a normie" % msg.source.nick)
+			bot.set_privilege(msg.source.nick, 0)
