@@ -31,8 +31,7 @@ baneposting_dict = {
 def bane_trg(bot, msg):
 	global baneposting_dict
 	if (msg.command == "PRIVMSG"):
-		msg.trailing = msg.trailing.lower()
 		for key in baneposting_dict:
-			if re.search(key, msg.trailing) is not None:
+			if re.search(key, msg.trailing.lower()) is not None:
 				bot.conn.privmsg(msg.args[0], baneposting_dict[key])
 				break
