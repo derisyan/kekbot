@@ -171,3 +171,14 @@ def set_loop_tm(bot, msg, args, pure):
 	if (not pure) and out:
 		bot.conn.privmsg(msg.args[0], out)
 	return out
+
+@command("raw", 3)
+def raw_msg(bot, msg, args, pure):
+	out = "usage: raw <irc msg>"
+	tmp = " ".join(args)
+	if tmp:
+		bot.conn.send_raw(tmp)
+		out = "sent '%s'" % tmp
+	if (not pure) and out:
+		bot.conn.privmsg(msg.args[0], out)
+	return out
