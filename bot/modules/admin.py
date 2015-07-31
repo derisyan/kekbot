@@ -28,7 +28,7 @@ def part(bot, msg, args, pure):
 @command("setpr", 3)
 def setpr(bot, msg, args, pure):
 	out = "usage: setpr <nick> <priv>"
-	if (args[1].isdigit()) and (len(args) != 2):
+	if (args[1].isdigit()) and (len(args) == 2):
 		p = int(args[1])
 		if (p < 0) and (p > 3):
 			out = "error: invalid privilege"
