@@ -146,8 +146,10 @@ def set_cmd_prefix(bot, msg, args, pure):
 
 @command("cooldown", 3)
 def set_cooldown(bot, msg, args, pure):
-	out = "usage: cooldown <float(secs)>"
-	if (len(args) == 1) and is_float(args[0]):
+	out = "usage: cooldown [float(secs)]"
+	if len(args) == 0:
+		out = "cooldown is currently %f" % bot.cooldown_time
+	elif (len(args) == 1) and is_float(args[0]):
 		tm = float(args[0])
 		if (tm > 0) and (tm < 61):
 			bot.cooldown_time = tm
@@ -161,7 +163,9 @@ def set_cooldown(bot, msg, args, pure):
 @command("looptime", 3)
 def set_loop_tm(bot, msg, args, pure):
 	out = "usage: looptime <float(secs)>"
-	if (len(args) == 1) and is_float(args[0]):
+	if len(args) == 0:
+		out = "looptime is currently %f" % bot.desired_loop_tm
+	elif (len(args) == 1) and is_float(args[0]):
 		tm = float(args[0])
 		if (tm > 0) and (tm < 10):
 			bot.desired_loop_tm = tm
