@@ -7,7 +7,7 @@ module_blacklist = (
 )
 temp = []
 
-for fname in os.listdir(__file__.rsplit("/", 1)[0]):
+for fname in os.listdir(os.path.join(os.getcwd(), "modules")):
 	if "." in fname:
 		base, ext = fname.rsplit(".", 1)
 	else:
