@@ -7,7 +7,7 @@ module_blacklist = (
 )
 temp = []
 
-for fname in os.listdir(os.path.join(os.getcwd(), "modules")):
+for fname in os.listdir(os.path.join(os.getcwd(), "bot/modules")):
 	if "." in fname:
 		base, ext = fname.rsplit(".", 1)
 	else:
