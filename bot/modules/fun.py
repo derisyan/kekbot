@@ -47,6 +47,7 @@ _spurdo_dict = {
 	"ts":			"tz",
 	"us":			"uz",
 	"ws":			"wz",
+	"va":			"ba",
 	"ys":			"yz",
 	"ng":			"nk",
 	"vic":			"vig",
